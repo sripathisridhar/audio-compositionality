@@ -1,0 +1,26 @@
+# Base config — every model-specific config inherits these defaults.
+# CLI overrides use dot notation, e.g.:
+#   python cli/eval_a_coat.py configs/random.yaml train.batch_size=128
+
+model:
+  name: ~          # required — set in each model config
+
+data:
+  num_workers: 4   # DataLoader worker processes; set to 0 to disable multiprocessing.
+
+train:
+  epochs: 20
+  batch_size: 64
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  grad_clip: 1.0
+  patience: 4
+  ema_alpha: 0.3
+  seed: 42
+
+output:
+  dir: outputs/${model.name}
+
+cache:
+  # Embeddings are encoder artefacts, not run artefacts — share across runs.
+  dir: cache

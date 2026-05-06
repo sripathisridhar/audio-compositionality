@@ -1,0 +1,4 @@
+# downsample baseline — overrides only; defaults inherited from configs/base.yaml.
+
+model:
+  name: downsample

@@ -1,0 +1,7 @@
+# random baseline — overrides only; defaults inherited from configs/base.yaml.
+# model.seed is forwarded to RandomEncoder.__init__ to make embeddings
+# reproducible across runs; change it to test sensitivity to the random init.
+
+model:
+  name: random
+  seed: 42

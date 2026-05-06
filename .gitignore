@@ -1,0 +1,27 @@
+# Computed embedding cache
+cache/
+
+# Training checkpoints + eval results
+outputs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Build artifacts
+build/
+dist/
+*.whl
+
+# Virtual envs
+.venv/
+venv/
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store

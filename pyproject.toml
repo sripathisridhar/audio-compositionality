@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "audiocomp"
+version = "1.0.0"
+description = "Audio Compositionality Benchmark — A-TRE & A-COAT (ICASSP 2026)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.0",
+    "torchaudio>=2.0",
+    "numpy",
+    "pandas<3",
+    "datasets[audio]",
+    "tqdm",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["audiocomp"]
+
+[tool.ruff]
+line-length = 100
