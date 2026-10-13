@@ -1,6 +1,0 @@
-# Set model.m2d_repo to an m2d checkout and model.checkpoint to m2d_clap_vit_base-80x1001p16x16p16kpBpTI-2025/checkpoint-30.pth.
-
-model:
-  name: m2d_clap_proj
-  m2d_repo: ~
-  checkpoint: ~

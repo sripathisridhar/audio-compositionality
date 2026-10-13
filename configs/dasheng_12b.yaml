@@ -1,5 +1,0 @@
-# Dasheng 1.2B; weights download into $TORCH_HOME on first use.
-
-model:
-  name: dasheng_12b
-  size: 1.2B
