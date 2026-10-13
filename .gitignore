@@ -20,6 +20,22 @@ dist/
 .venv/
 venv/
 
+# Local cluster setup: job scripts, env specs, container overlays, notes
+*.sh
+*.sbatch
+envs/
+scripts/
+slurm/
+logs/
+HPC_*.md
+HANDOVER.md
+*.ext3
+*.ext3.gz
+*.sif
+.*.sifpath
+sing
+singrw
+
 # Editor / OS
 .vscode/
 .idea/
