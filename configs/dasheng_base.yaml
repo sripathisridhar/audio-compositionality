@@ -1,0 +1,5 @@
+# Dasheng base; weights download into $TORCH_HOME on first use.
+
+model:
+  name: dasheng_base
+  size: base

@@ -1,0 +1,5 @@
+# Set model.model_dir to a dir with config.json, the index and the audio_encoder shard of mispeech/midashenglm-7b-0804-fp32.
+
+model:
+  name: midashenglm_7b_audio
+  model_dir: ~

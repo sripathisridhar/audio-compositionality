@@ -1,0 +1,5 @@
+# Set model.model_dir to a dir with config.json, preprocessor_config.json, the index and the audio_tower shard of Qwen/Qwen3-Omni-30B-A3B-Instruct.
+
+model:
+  name: qwen3_omni_aut_instruct
+  model_dir: ~

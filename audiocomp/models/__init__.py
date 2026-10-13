@@ -23,10 +23,22 @@ from __future__ import annotations
 
 from .base import AudioEncoder
 from .baselines import DownsampleEncoder, RandomEncoder
+from .dasheng import DashengEncoder, MiDashengLMAudioEncoder
+from .m2d_clap import M2DCLAPEncoder, M2DCLAPProjEncoder
+from .qwen3_omni_aut import Qwen3OmniAuTEncoder
 
+# One class may serve several names; the name keys the embedding cache and output dir.
 _REGISTRY: dict[str, type[AudioEncoder]] = {
     "random": RandomEncoder,
     "downsample": DownsampleEncoder,
+    "dasheng_base": DashengEncoder,
+    "dasheng_06b": DashengEncoder,
+    "dasheng_12b": DashengEncoder,
+    "midashenglm_7b_audio": MiDashengLMAudioEncoder,
+    "m2d_clap": M2DCLAPEncoder,
+    "m2d_clap_proj": M2DCLAPProjEncoder,
+    "qwen3_omni_aut_instruct": Qwen3OmniAuTEncoder,
+    "qwen3_omni_aut_captioner": Qwen3OmniAuTEncoder,
 }
 
 
