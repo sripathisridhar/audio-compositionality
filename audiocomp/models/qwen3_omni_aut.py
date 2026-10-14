@@ -1,4 +1,4 @@
-"""Qwen3-Omni-30B-A3B audio tower (AuT), scored on ``ln_post`` tokens averaged over time."""
+"""Qwen3-Omni-30B-A3B audio tower (AuT), scored on ``ln_post`` or ``proj2`` tokens averaged over time."""
 
 from __future__ import annotations
 
@@ -9,11 +9,11 @@ from .base import AudioEncoder
 
 
 class Qwen3OmniAuTEncoder(AudioEncoder):
-    """``model_dir`` holds the HF repo's config.json, preprocessor_config.json, index and audio_tower shard."""
+    """``model_dir`` holds the HF repo's config.json, preprocessor_config.json, index and audio_tower shard; ``tap`` is ``ln_post`` (AuT space) or ``proj2`` (LLM input space)."""
 
     sample_rate: int = 16_000
 
-    def __init__(self, model_dir: str) -> None:
+    def __init__(self, model_dir: str, tap: str) -> None:
         from transformers import Qwen3OmniMoeConfig, WhisperFeatureExtractor
         from transformers.models.qwen3_omni_moe.modeling_qwen3_omni_moe import (
             Qwen3OmniMoeAudioEncoder,
@@ -28,9 +28,8 @@ class Qwen3OmniAuTEncoder(AudioEncoder):
         self._model.eval()
         self._fe = WhisperFeatureExtractor.from_pretrained(model_dir)
         self._out_lengths = _get_feat_extract_output_lengths
-        self.embedding_dim = cfg.d_model
-        # The hook keeps the encoder's own final layer, before proj1/proj2 map it into the LLM.
-        self._model.ln_post.register_forward_hook(self._keep_tokens)
+        self.embedding_dim = cfg.output_dim if tap == "proj2" else cfg.d_model
+        getattr(self._model, tap).register_forward_hook(self._keep_tokens)
 
     def _keep_tokens(self, module, inputs, output) -> None:
         self._tokens = output

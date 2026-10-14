@@ -67,7 +67,8 @@ python cli/eval_a_coat.py configs/base.yaml model.name=dasheng_06b model.size=0.
 | `midashenglm_7b_audio` | `model.model_dir=<dir with config.json, the index and the audio_encoder shard of mispeech/midashenglm-7b-0804-fp32>` | final-layer tokens (1280) |
 | `m2d_clap` | `model.m2d_repo=<nttcslab/m2d checkout> model.checkpoint=<m2d_clap_vit_base-80x1001p16x16p16kpBpTI-2025/checkpoint-30.pth>` | backbone patch tokens (768) |
 | `m2d_clap_proj` | same as `m2d_clap` | text-aligned `encode_clap_audio` output |
-| `qwen3_omni_aut_instruct`, `qwen3_omni_aut_captioner` | `model.model_dir=<dir with config.json, preprocessor_config.json, the index and the audio_tower shard of Qwen/Qwen3-Omni-30B-A3B-Instruct or -Captioner>` | `ln_post` tokens (1280) |
+| `qwen3_omni_aut_instruct`, `qwen3_omni_aut_captioner` | `model.model_dir=<dir with config.json, preprocessor_config.json, the index and the audio_tower shard of Qwen/Qwen3-Omni-30B-A3B-Instruct or -Captioner> model.tap=ln_post` | `ln_post` tokens (1280) |
+| `qwen3_omni_aut_proj` | same as `qwen3_omni_aut_instruct`, with `model.tap=proj2` | `proj2` tokens, the thinker's audio input embeddings (2048) |
 
 They also need `dasheng`, `transformers>=5`, `safetensors`, `timm>=0.9`, `einops` and `nnAudio`.
 

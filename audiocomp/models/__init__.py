@@ -39,6 +39,7 @@ _REGISTRY: dict[str, type[AudioEncoder]] = {
     "m2d_clap_proj": M2DCLAPProjEncoder,
     "qwen3_omni_aut_instruct": Qwen3OmniAuTEncoder,
     "qwen3_omni_aut_captioner": Qwen3OmniAuTEncoder,
+    "qwen3_omni_aut_proj": Qwen3OmniAuTEncoder,
 }
 
 
