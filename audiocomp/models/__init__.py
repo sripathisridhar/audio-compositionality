@@ -24,6 +24,7 @@ from __future__ import annotations
 from .base import AudioEncoder
 from .baselines import DownsampleEncoder, RandomEncoder
 from .dasheng import DashengEncoder, MiDashengLMAudioEncoder
+from .gemma4_audio import Gemma4AudioEncoder
 from .m2d_clap import M2DCLAPEncoder, M2DCLAPProjEncoder
 from .qwen3_omni_aut import Qwen3OmniAuTEncoder
 
@@ -40,6 +41,8 @@ _REGISTRY: dict[str, type[AudioEncoder]] = {
     "qwen3_omni_aut_instruct": Qwen3OmniAuTEncoder,
     "qwen3_omni_aut_captioner": Qwen3OmniAuTEncoder,
     "qwen3_omni_aut_proj": Qwen3OmniAuTEncoder,
+    "gemma4_audio": Gemma4AudioEncoder,
+    "gemma4_audio_proj": Gemma4AudioEncoder,
 }
 
 

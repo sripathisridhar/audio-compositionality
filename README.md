@@ -69,6 +69,8 @@ python cli/eval_a_coat.py configs/base.yaml model.name=dasheng_06b model.size=0.
 | `m2d_clap_proj` | same as `m2d_clap` | text-aligned `encode_clap_audio` output |
 | `qwen3_omni_aut_instruct`, `qwen3_omni_aut_captioner` | `model.model_dir=<dir with config.json, preprocessor_config.json, the index and the audio_tower shard of Qwen/Qwen3-Omni-30B-A3B-Instruct or -Captioner> model.tap=ln_post` | `ln_post` tokens (1280) |
 | `qwen3_omni_aut_proj` | same as `qwen3_omni_aut_instruct`, with `model.tap=proj2` | `proj2` tokens, the thinker's audio input embeddings (2048) |
+| `gemma4_audio` | `model.model_dir=<dir with config.json, processor_config.json and model.safetensors of google/gemma-4-E4B-it> model.tap=encoder` | last conformer layer tokens (1024) |
+| `gemma4_audio_proj` | same as `gemma4_audio`, with `model.tap=embed_audio` | `embed_audio` tokens, the LLM's audio input embeddings (2560) |
 
 They also need `dasheng`, `transformers>=5`, `safetensors`, `timm>=0.9`, `einops` and `nnAudio`.
 
