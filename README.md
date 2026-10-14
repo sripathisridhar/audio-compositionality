@@ -1,3 +1,6 @@
+# This is a fork to evaluate modern audio representations.
+
+
 # audio-compositionality
 
 [![arXiv](https://img.shields.io/badge/arXiv-2603.13685-b31b1b.svg)](https://arxiv.org/abs/2603.13685)
@@ -49,6 +52,27 @@ Override any config value inline:
 ```bash
 python cli/eval_a_coat.py configs/random.yaml train.batch_size=128 cache.dir=/fast/disk/cache
 ```
+
+## Encoders added in this fork
+
+Launch these from `configs/base.yaml`, passing the registry name and constructor args on the command line:
+
+```bash
+python cli/eval_a_coat.py configs/base.yaml model.name=dasheng_06b model.size=0.6B
+```
+
+| `model.name` | Constructor args | Embedding (time-averaged) |
+|---|---|---|
+| `dasheng_base`, `dasheng_06b`, `dasheng_12b` | `model.size=base`, `0.6B` or `1.2B` | final-layer tokens (768 / 1280 / 1536) |
+| `midashenglm_7b_audio` | `model.model_dir=<dir with config.json, the index and the audio_encoder shard of mispeech/midashenglm-7b-0804-fp32>` | final-layer tokens (1280) |
+| `m2d_clap` | `model.m2d_repo=<nttcslab/m2d checkout> model.checkpoint=<m2d_clap_vit_base-80x1001p16x16p16kpBpTI-2025/checkpoint-30.pth>` | backbone patch tokens (768) |
+| `m2d_clap_proj` | same as `m2d_clap` | text-aligned `encode_clap_audio` output |
+| `qwen3_omni_aut_instruct`, `qwen3_omni_aut_captioner` | `model.model_dir=<dir with config.json, preprocessor_config.json, the index and the audio_tower shard of Qwen/Qwen3-Omni-30B-A3B-Instruct or -Captioner> model.tap=ln_post` | `ln_post` tokens (1280) |
+| `qwen3_omni_aut_proj` | same as `qwen3_omni_aut_instruct`, with `model.tap=proj2` | `proj2` tokens, the thinker's audio input embeddings (2048) |
+| `gemma4_audio` | `model.model_dir=<dir with config.json, processor_config.json and model.safetensors of google/gemma-4-E4B-it> model.tap=encoder` | last conformer layer tokens (1024) |
+| `gemma4_audio_proj` | same as `gemma4_audio`, with `model.tap=embed_audio` | `embed_audio` tokens, the LLM's audio input embeddings (2560) |
+
+They also need `dasheng`, `transformers>=5`, `safetensors`, `timm>=0.9`, `einops` and `nnAudio`.
 
 ## Datasets
 
@@ -155,6 +179,8 @@ Three small edits:
 Then `python cli/eval_a_coat.py configs/my_model.yaml` etc. work the same
 way as for the shipped baselines. The cache logic, padding, resampling and
 batch shapes are model-agnostic.
+
+The YAML is optional: `python cli/eval_a_coat.py configs/base.yaml model.name=my_model model.checkpoint=/path/to/weights.pt` is equivalent.
 
 ## Citation
 
